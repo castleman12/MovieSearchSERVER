@@ -17,5 +17,15 @@ router.post('/', (req, res)=> {
     .catch(err => res.status(500).json({ error: err}))
 })
 
+//** DELETE **/
+router.delete("/delete/:id", function (req, res) {
+    const query = { where: { id: req.params.id}};
+
+    movie.destroy(query)
+    .then(() => res.status(200).json({ message: "Movie removed!"}))
+    .catch((err) => res.status(500).json({ error: err}))
+
+})
+
 
 module.exports = router;
