@@ -6,6 +6,8 @@ let watchlist = require('./controllers/watchlistcontroller');
 
 sequelize.sync();
 
+app.use(express.json());
+
 app.use('/watchlist', watchlist);
 
 app.listen(process.env.PORT, function(){
