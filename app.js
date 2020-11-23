@@ -1,22 +1,18 @@
 require('dotenv').config();
 let express = require('express');
 let app = express();
-
 const db = require("./db");
 
-//let journal = require('./controllers/journalcontroller'); 
+let watchlist = require('./controllers/watchlistcontroller');
 let user = require('./controllers/usercontroller');
 
 app.use(require('./middleware/headers'));
 app.use(express.json());
  
-/*** Exposed route ***/
+
 app.use ('/user',user);
+app.use('/watchlist', watchlist);
 
-/*** Protected route ***/
-//app.use(require('./middleware/validate-session'));
-
-//app.use('/journal', journal);
 
 db.authenticate()
   .then(() => db.sync())  // => (force: true)
