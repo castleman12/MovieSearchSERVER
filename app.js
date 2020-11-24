@@ -11,6 +11,7 @@ app.use(express.json());
 
 const validateSession = require('./middleware/validate-session')
 
+
 app.use ('/user',user);
 app.use('/watchlist', watchlist, validateSession);
 

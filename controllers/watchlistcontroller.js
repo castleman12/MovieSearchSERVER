@@ -1,3 +1,5 @@
+const validateSession = require('../../../../javaScriptLibrary/05-Node-Server/server/middleware/validate-session');
+
 const router = require('express').Router();
 const Watchlist = require('../db').import('../models/watchlist');
 
@@ -16,6 +18,16 @@ router.post('/', (req, res)=> {
     .then(movie => res.status(200).json(`${movie.title} has been added to your watchlist!`))
     .catch(err => res.status(500).json({ error: err}))
 })
+
+//** GET ENTRIES BY USERID **/
+router.get("/user", validateSession, (req, res) => {
+    Watchlist.findAll({
+        where: { userId: req.user.id}
+    })
+    .then(movie => res.status(200).json(movie))
+    .catch(err => res.status(500).json({ error: err }))
+})
+
 
 //** DELETE **/
 router.delete("/delete/:id", function (req, res) {
