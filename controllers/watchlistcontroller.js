@@ -30,14 +30,27 @@ router.get("/user", validateSession, (req, res) => {
 
 
 //** DELETE **/
-router.delete("watchlist/delete/:id", validateSession, function (req, res) {
-    const query = { where: { id: req.params.id}};
+router.delete("/delete/:id", function (req, res) {
+    const query = { where: { id: req.params.id, userId: req.user.id}};
 
-    watchlist.destroy(query)
+    Watchlist.destroy(query)
     .then(() => res.status(200).json({ message: "Movie removed!"}))
     .catch((err) => res.status(500).json({ error: err}))
 
 })
 
+
+router.put('/:id', function(req, res){
+  const updateWatchlistFilm = {
+    watched: req.body.watched
+  };
+
+  const query = {where: {id: req.params.id, userId: req.user.id}};
+
+  Watchlist.update(updateWatchlistFilm, query)
+  .then(() => res.status(200).json({message: "Changed Watched status!"}))
+  .catch((err) => res.status(500).json({ error: err}));
+      
+});
 
 module.exports = router;
