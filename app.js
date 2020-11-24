@@ -8,7 +8,8 @@ let user = require('./controllers/usercontroller');
 
 app.use(require('./middleware/headers'));
 app.use(express.json());
- 
+
+app.use(require('./middleware/validateSession'));
 
 app.use ('/user',user);
 app.use('/watchlist', watchlist);
