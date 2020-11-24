@@ -1,5 +1,3 @@
-const validateSession = require('../../../../javaScriptLibrary/05-Node-Server/server/middleware/validate-session');
-
 const router = require('express').Router();
 const Watchlist = require('../db').import('../models/watchlist');
 
@@ -20,7 +18,7 @@ router.post('/', (req, res)=> {
 })
 
 //** GET ENTRIES BY USERID **/
-router.get("/user", validateSession, (req, res) => {
+router.get("/user", (req, res) => {
     Watchlist.findAll({
         where: { userId: req.user.id}
     })

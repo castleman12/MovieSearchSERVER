@@ -9,11 +9,11 @@ let user = require('./controllers/usercontroller');
 app.use(require('./middleware/headers'));
 app.use(express.json());
 
-const validateSession = require('./middleware/validate-session')
+const validateSession = require('./middleware/validateSession')
 
 
 app.use ('/user',user);
-app.use('/watchlist', watchlist, validateSession);
+app.use('/watchlist', validateSession, watchlist);
 
 
 db.authenticate()
