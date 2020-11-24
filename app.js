@@ -8,10 +8,11 @@ let user = require('./controllers/usercontroller');
 
 app.use(require('./middleware/headers'));
 app.use(express.json());
- 
+
+const validateSession = require('./middleware/validate-session')
 
 app.use ('/user',user);
-app.use('/watchlist', watchlist);
+app.use('/watchlist', watchlist, validateSession);
 
 
 db.authenticate()
