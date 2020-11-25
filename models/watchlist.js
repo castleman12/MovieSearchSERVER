@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     watched: {
       type: DataTypes.BOOLEAN
+    },
+    uniqueCheck: {
+      type: DataTypes.STRING,
+      unique: true
     }
   })
   return Watchlist;
