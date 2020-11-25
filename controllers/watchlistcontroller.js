@@ -10,7 +10,8 @@ router.post('/', (req, res)=> {
     movieDBid: req.body.movieDBid,
     releaseDate: req.body.releaseDate,
     userId: req.user.id,
-    watched: req.body.watched
+    watched: req.body.watched,
+    uniqueCheck: `imdb${req.body.movieDBid}user${req.user.id}`
   }
   Watchlist.create(addMovie)
     .then(movie => res.status(200).json(`${movie.title} has been added to your watchlist!`))
