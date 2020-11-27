@@ -1,15 +1,25 @@
-require('dotenv').config(); 
+require('dotenv').config();
 let express = require('express');
 let app = express();
-let sequelize = require('./db');
+const db = require("./db");
+
 let watchlist = require('./controllers/watchlistcontroller');
+let user = require('./controllers/usercontroller');
 
-sequelize.sync();
-
+app.use(require('./middleware/headers'));
 app.use(express.json());
 
-app.use('/watchlist', watchlist);
+const validateSession = require('./middleware/validateSession')
 
-app.listen(process.env.PORT, function(){
-  console.log(`App is listening on port ${process.env.PORT}`)
-})
+
+app.use ('/user',user);
+app.use('/watchlist', validateSession, watchlist);
+
+
+db.authenticate()
+  .then(() => db.sync())  // => (force: true)
+  .then(() => {
+    app.listen(process.env.PORT, () => console.log(`[Server: ] App is listening on Port ${process.env.PORT}`));  
+  })
+  .catch((err) => {console.log(err)
+  })

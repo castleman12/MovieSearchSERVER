@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize('movieSearch', 'postgres', process.env.POSTGRESPASSWORD, {
   host: 'localhost',
   dialect: 'postgres'
