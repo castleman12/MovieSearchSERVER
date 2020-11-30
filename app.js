@@ -17,7 +17,7 @@ app.use('/watchlist', validateSession, watchlist);
 
 
 db.authenticate()
-  .then(() => db.sync())  // => (force: true)
+  .then(() => db.sync() )  // => (force: true)
   .then(() => {
     app.listen(process.env.PORT, () => console.log(`[Server: ] App is listening on Port ${process.env.PORT}`));  
   })
