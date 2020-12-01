@@ -9,10 +9,8 @@ let user = require('./controllers/usercontroller');
 app.use(require('./middleware/headers'));
 app.use(express.json());
  
-
 app.use ('/user',user);
 app.use('/watchlist', watchlist);
-
 
 db.authenticate()
   .then(() => db.sync())  // => (force: true)
@@ -21,3 +19,5 @@ db.authenticate()
   })
   .catch((err) => {console.log(err)
   })
+
+  
